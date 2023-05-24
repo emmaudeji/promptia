@@ -2,7 +2,10 @@ import React from 'react'
 
 const Feed = () => {
   return (
-    <div>Feed</div>
+    <section className='section-padding mt-14'>
+      
+      
+    </section >
   )
 }
 

@@ -1,7 +1,9 @@
 import Feed from "@/components/Feed"
-import { connectToDB } from "@/utils/dataBase"
+
+
+
 export default function Home() {
-connectToDB()
+
   return (
     <main className=" section-padding pt-14">
       <section className='w-full flex-center flex-col'>
