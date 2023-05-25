@@ -5,7 +5,7 @@ import Feed from "@/components/Feed"
 export default function Home() {
 
   return (
-    <main className=" section-padding pt-14">
+    <>
       <section className='w-full flex-center flex-col'>
           <h1 className='head_text text-center'>
             Discover & Share
@@ -17,11 +17,11 @@ export default function Home() {
             discover, create and share creative prompts
           </p>
       </section>
-      <section className=" pt-14">
-        <Feed />
-      </section>
       
-    </main>
+      <Feed />
+     
+      
+    </>
   )
 }
 
