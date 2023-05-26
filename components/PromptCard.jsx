@@ -14,7 +14,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-    console.log(post);
+    // console.log(post);
 
     if (post.creator._id === session?.user.id) return router.push("/profile");
 
@@ -69,7 +69,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         #{post.tag}
       </p>
 
-      {/* {session?.user.id === post.creator._id && pathName === "/profile" && (
+      {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p
             className=' text-sm green_gradient cursor-pointer'
@@ -84,7 +84,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             Delete
           </p>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
