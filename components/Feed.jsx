@@ -5,15 +5,16 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
+
   return (
     <div className='mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-      {data.map((post) => (
+      {data?.length ? data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
         />
-      ))}
+       )) : <div className="h-40 w-full flex justify-center items-center ">Loading...</div>}
     </div>
   );
 };
@@ -26,6 +27,7 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
+  
 
   const fetchPosts = async () => {
     const response = await fetch("/api/prompt");

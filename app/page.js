@@ -3,6 +3,7 @@
 import Feed from "@/components/Feed"
 import { useState, useEffect } from "react";
 import { signIn, useSession, getProviders } from "next-auth/react";
+import Link from "next/link";
 
 
 
@@ -30,18 +31,19 @@ export default function Home() {
           Empower the Modern World with an Open-Source AI Prompting Tool, Enabling Discovery, Creation, and Sharing of Creative Prompts.
           </p>
           <>
-            {!session && providers?.map((provider) => (
-                <button
-                  type='button'
-                  key={provider?.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
+            {!session ?
+                <Link href={'/auth'}
                   className='black_btn mt-10'
                 >
                   Get started
-                </button>
-              ))}
+                </Link>
+                :
+                <Link href={'/create-prompt'}
+                className='black_btn mt-10 sm:hidden'
+                >
+                  Create prompt
+                </Link>
+              }
           </>
       </section>
       

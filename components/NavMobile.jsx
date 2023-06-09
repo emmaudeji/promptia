@@ -1,23 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import {MdAccountCircle } from 'react-icons/md'
-import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import ProfileImage from "./ProfileImage";
 
 
 
 const NavMobile = ( ) => {
   const [toggleDropdown, setToggleDropdown] = useState(false)
-  const [providers, setProviders] = useState([])
   const { data: session } = useSession();
 
 
-   useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res && Object.values(res));
-    })();
-  }, []);
 
   return (
     <div className='relative'>
@@ -33,7 +26,7 @@ const NavMobile = ( ) => {
                 className='rounded-full'
                 alt='profile'
               /> : 
-              <MdAccountCircle size={30}/>
+              <ProfileImage username={session?.user.username}/>
               }
             </div>
             
@@ -66,22 +59,15 @@ const NavMobile = ( ) => {
               </div>
             )}
           </div>
-        ) : (
-          <>
-            {providers?.map((provider) => (
-                <button
-                  type='button'
-                  key={provider?.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
+        ) : 
+         
+                <Link href={'/auth'}
                   className='black_btn'
                 >
                   Sign in
-                </button>
-              ))}
-          </>
-        )}
+                </Link>
+
+        }
       </div>
   )
 }

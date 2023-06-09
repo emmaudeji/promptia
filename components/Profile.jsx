@@ -1,4 +1,5 @@
 import PromptCard from "./PromptCard";
+import Link from "next/link";
 
 const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
   return (
@@ -9,14 +10,22 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
       <p className='desc text-left'>{desc}</p>
 
       <div className='mt-10 prompt_layout'>
-        {data.map((post) => (
+        
+        {data?.lenght ? data.map((post) => (
           <PromptCard
             key={post._id}
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}
             handleDelete={() => handleDelete && handleDelete(post)}
           />
-        ))}
+        )) : 
+        <div className="grid">
+          <div className="pb-4"> You haven'nt created any prompt. </div>
+          <div>
+            <Link href={'/create-prompt'} className="black_btn"> Create prompt </Link>
+          </div>
+        </div >
+        }
       </div>
     </section>
   );

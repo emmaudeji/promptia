@@ -1,19 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import {MdAccountCircle } from 'react-icons/md'
-import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { signOut, useSession,  } from "next-auth/react";
+import ProfileImage from "./ProfileImage";
 
 const NavDestop = ( ) => {
-  const [providers, setProviders] = useState([]);
   const { data: session } = useSession();
-  
- useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res && Object.values(res));
-    })();
-  }, []);
 
   return (
     <div>
@@ -34,25 +26,16 @@ const NavDestop = ( ) => {
                 height={37}
                 className='rounded-full'
                 alt='profile'
-              /> : <MdAccountCircle size={40} />}
+              /> : <ProfileImage username={session?.user.username}/>}
             </Link>
           </div>
-        ) : (
-          <>
-            {providers?.map((provider) => (
-                <button
-                  type='button'
-                  key={provider?.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
+        ) :    
+                <Link href={'/auth'}
                   className='black_btn'
                 >
                   Sign in
-                </button>
-              ))}
-          </>
-        )}
+                </Link >
+        }
       </div>
   )
 }

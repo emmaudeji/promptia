@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { MdCheck, MdFileCopy } from "react-icons/md";
+import ProfileImage from "./ProfileImage";
 
 const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -34,13 +35,15 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer '
           onClick={handleProfileClick}
         >
-          <Image
+          {post.creator.image ? <Image
             src={post.creator.image}
             alt='user_image'
             width={40}
             height={40}
             className='rounded-full object-contain'
-          />
+          /> :
+          <ProfileImage username={post.creator.username}/>
+          }
 
           <div className='flex flex-col'>
             <h3 className=' font-semibold text-gray-900'>
